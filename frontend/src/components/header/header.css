@@ -1,0 +1,10 @@
+header-container {
+  width: 100%;
+  height: 250px;
+  background-color: rgb(199, 34, 34);
+}
+header-logo {
+  height: 200px;
+  width: 200px;
+  size: 200px;
+}
