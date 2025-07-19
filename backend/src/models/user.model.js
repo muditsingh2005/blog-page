@@ -41,6 +41,10 @@ const userSchema = new Schema(
     bio: {
       type: String,
     },
+
+    refreshToken: {
+      type: String,
+    },
   },
   {
     timestamps: true, //for created at, updated at
