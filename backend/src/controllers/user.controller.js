@@ -5,7 +5,7 @@ import { ApiResponse } from "../utils/ApiResponse.js";
 import { uploadOnCloudinary } from "../utils/cloudinary.js";
 
 const registerUser = asyncHandler(async (req, res) => {
-  const { fullName, email, username, password } = req.body;
+  const { fullName, email, username, password, bio } = req.body;
 
   if (
     [fullName, username, email, password].some((field) => field?.trim() == "")
@@ -42,6 +42,7 @@ const registerUser = asyncHandler(async (req, res) => {
     avatar: avatar.url,
     email,
     password,
+    bio,
     username: username.toLowerCase(),
   });
 
