@@ -1,14 +1,31 @@
 import { useState } from "react";
-import "./App.css";
-import Header from "./components/header/header.jsx";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
 
-function App() {
+import Register_2 from "./components/register/register_2.jsx";
+import Register_1 from "./components/register/register_1.jsx";
+
+export default function App() {
+  const [formData, setFormData] = useState({});
+
   return (
-    <>
-      <Header />
-      <h1>Creating a blog page</h1>
-    </>
+    <Router>
+      <Routes>
+        {/* <Route path="/" element={<Navigate to="/register_1" />} /> */}
+        <Route
+          path="/register_1"
+          element={<Register_1 formData={formData} setFormData={setFormData} />}
+        />
+        //
+        <Route
+          path="/register_2"
+          element={<Register_2 formData={formData} setFormData={setFormData} />}
+        />
+      </Routes>
+    </Router>
   );
 }
-
-export default App;
