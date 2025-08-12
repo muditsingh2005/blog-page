@@ -1,0 +1,304 @@
+/* Registration Form Styles */
+.register-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 20px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  position: relative;
+}
+
+/* Logo Styles */
+.register-logo {
+  position: absolute;
+  top: 30px;
+  left: 30px;
+  width: 60px;
+  height: 60px;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+  transition: all 0.3s ease;
+  z-index: 10;
+}
+
+.register-logo:hover {
+  transform: scale(1.05);
+  filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.4));
+}
+
+.register-card {
+  background: white;
+  border-radius: 20px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  padding: 40px;
+  width: 100%;
+  max-width: 450px;
+  position: relative;
+  overflow: hidden;
+}
+
+.register-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #667eea, #764ba2);
+}
+
+/* Progress Indicator */
+.progress-container {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.progress-steps {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.step {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 14px;
+  margin: 0 10px;
+  transition: all 0.3s ease;
+}
+
+.step.active {
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: white;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+}
+
+.step.completed {
+  background: #10b981;
+  color: white;
+}
+
+.step.inactive {
+  background: #e5e7eb;
+  color: #6b7280;
+}
+
+.step-connector {
+  width: 30px;
+  height: 2px;
+  background: #e5e7eb;
+  margin: 0 5px;
+}
+
+.step-connector.active {
+  background: linear-gradient(90deg, #667eea, #764ba2);
+}
+
+.progress-text {
+  color: #6b7280;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* Form Styles */
+.register-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-label {
+  font-weight: 600;
+  color: #374151;
+  font-size: 14px;
+  margin-bottom: 4px;
+}
+
+.form-input {
+  padding: 15px 18px;
+  border: 2px solid #e5e7eb;
+  border-radius: 12px;
+  font-size: 16px;
+  transition: all 0.3s ease;
+  background: #f9fafb;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: #667eea;
+  background: white;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.form-input::placeholder {
+  color: #9ca3af;
+}
+
+.form-textarea {
+  min-height: 100px;
+  resize: vertical;
+  font-family: inherit;
+}
+
+/* File Upload Styles */
+.file-upload-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.file-input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.file-input {
+  display: none;
+}
+
+.file-input-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 15px 20px;
+  background: #f3f4f6;
+  border: 2px dashed #d1d5db;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: #6b7280;
+  font-weight: 500;
+}
+
+.file-input-label:hover {
+  background: #e5e7eb;
+  border-color: #9ca3af;
+}
+
+.file-input-label svg {
+  width: 20px;
+  height: 20px;
+}
+
+.image-preview {
+  width: 80px;
+  height: 80px;
+  border-radius: 12px;
+  object-fit: cover;
+  border: 2px solid #e5e7eb;
+  background: #f9fafb;
+}
+
+/* Button Styles */
+.submit-button {
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: white;
+  border: none;
+  padding: 16px 32px;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 10px;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+}
+
+.submit-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+}
+
+.submit-button:active {
+  transform: translateY(0);
+}
+
+.submit-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .register-container {
+    padding: 15px;
+  }
+
+  .register-logo {
+    top: 20px;
+    left: 20px;
+    width: 50px;
+    height: 50px;
+  }
+
+  .register-card {
+    padding: 30px 25px;
+    border-radius: 16px;
+  }
+
+  .step {
+    width: 35px;
+    height: 35px;
+    font-size: 12px;
+    margin: 0 8px;
+  }
+
+  .step-connector {
+    width: 25px;
+  }
+
+  .form-input {
+    padding: 14px 16px;
+    font-size: 16px;
+  }
+
+  .submit-button {
+    padding: 14px 28px;
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .register-logo {
+    top: 15px;
+    left: 15px;
+    width: 45px;
+    height: 45px;
+  }
+
+  .register-card {
+    padding: 25px 20px;
+  }
+
+  .step {
+    width: 30px;
+    height: 30px;
+    font-size: 11px;
+    margin: 0 5px;
+  }
+
+  .step-connector {
+    width: 20px;
+  }
+
+  .progress-text {
+    font-size: 12px;
+  }
+}
