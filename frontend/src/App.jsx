@@ -8,6 +8,7 @@ import {
 
 import Register_2 from "./components/register/register_2.jsx";
 import Register_1 from "./components/register/register_1.jsx";
+import Landing from "./components/landing/landing.jsx";
 
 export default function App() {
   const [formData, setFormData] = useState({});
@@ -16,6 +17,8 @@ export default function App() {
     <Router>
       <Routes>
         {/* <Route path="/" element={<Navigate to="/register_1" />} /> */}
+        <Route path="/" element={<Landing />} />
+        //
         <Route
           path="/register_1"
           element={<Register_1 formData={formData} setFormData={setFormData} />}
