@@ -15,6 +15,11 @@ export default function Register_1({ formData, setFormData }) {
     navigate("/register_2");
   };
 
+  const handleLoginSubmit = (e) => {
+    e.preventDefault();
+    navigate("/login");
+  };
+
   return (
     <div className="register-container">
       {/* Logo */}
@@ -59,6 +64,10 @@ export default function Register_1({ formData, setFormData }) {
           <button type="submit" className="submit-button">
             Next
           </button>
+        </form>
+        <div>Already a User ?</div>
+        <form onSubmit={handleLoginSubmit}>
+          <button>sign in</button>
         </form>
       </div>
     </div>

@@ -34,16 +34,6 @@ export default function Register_2({ formData, setFormData }) {
     // Save it in the main form state
     setFormData(updatedData);
 
-    // // Prepare FormData for file + text
-    // const formDataToSend = new FormData();
-    // formDataToSend.append("email", updatedData.email);
-    // formDataToSend.append("password", updatedData.password);
-    // formDataToSend.append("username", updatedData.username);
-    // formDataToSend.append("fullName", updatedData.fullName);
-    // formDataToSend.append("bio", updatedData.bio);
-    // if (updatedData.avatar) {
-    //   formDataToSend.append("avatar", updatedData.avatar);
-    // }
     const form = new FormData();
     for (let key in updatedData) {
       form.append(key, updatedData[key]);
