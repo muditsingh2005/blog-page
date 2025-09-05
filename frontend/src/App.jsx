@@ -1,5 +1,10 @@
 import { useState } from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
 
 import Register_2 from "./components/register/register_2.jsx";
 import Register_1 from "./components/register/register_1.jsx";
@@ -8,28 +13,45 @@ import Landing from "./components/landing/landing.jsx";
 import Login from "./components/login/login.jsx";
 import Home from "./components/home/home.jsx";
 
+import ProtectedRoute from "./components/auth/ProtectedRoute.jsx";
+
 export default function App() {
   const [formData, setFormData] = useState({});
+  const isLoggedIn = window.localStorage.getItem("loggedIn");
 
   return (
     <Router>
       <Routes>
-        {/* <Route path="/" element={<Navigate to="/register_1" />} /> */}
+        {!isLoggedIn && (
+          <>
+            <Route
+              path="/register_1"
+              element={
+                <Register_1 formData={formData} setFormData={setFormData} />
+              }
+            />
+            <Route
+              path="/register_2"
+              element={
+                <Register_2 formData={formData} setFormData={setFormData} />
+              }
+            />
+            <Route
+              path="/login"
+              element={<Login formData={formData} setFormData={setFormData} />}
+            />
+            <Route path="/" element={<Landing />} />
+          </>
+        )}
         <Route path="/" element={<Landing />} />
-        //
-        <Route
-          path="/register_1"
-          element={<Register_1 formData={formData} setFormData={setFormData} />}
-        />
-        <Route
-          path="/register_2"
-          element={<Register_2 formData={formData} setFormData={setFormData} />}
-        />
-        <Route
-          path="/login"
-          element={<Login formData={formData} setFormData={setFormData} />}
-        />
-        <Route path="/home" element={<Home />} />
+        //protected routes
+        <Route element={<ProtectedRoute />}>
+          <Route path="/login" element={<Navigate to="/" />} />
+          <Route path="/register_1" element={<Navigate to="/" />} />
+          <Route path="/register_2" element={<Navigate to="/" />} />
+          <Route path="/" element={<Home />} />
+          <Route path="/home" element={<Home />} />
+        </Route>
       </Routes>
     </Router>
   );

@@ -4,10 +4,25 @@ import { useNavigate } from "react-router-dom";
 
 function Landing() {
   const navigate = useNavigate();
+  const isLoggedIn = window.localStorage.getItem("loggedIn");
 
   const handleGetStarted = (e) => {
     e.preventDefault();
-    navigate("/register_1");
+    // navigate("/register_1");
+    if (isLoggedIn === "true") {
+      navigate("/home");
+    } else {
+      navigate("/register_1");
+    }
+  };
+  const handleGetStarted_home = (e) => {
+    e.preventDefault();
+    // navigate("/home");
+    if (isLoggedIn === "true") {
+      navigate("/home");
+    } else {
+      navigate("/register_1");
+    }
   };
 
   return (
@@ -31,6 +46,10 @@ function Landing() {
           <div className="hero-buttons">
             <button className="btn btn-primary" onClick={handleGetStarted}>
               Get Started
+            </button>
+
+            <button className="btn btn-primary" onClick={handleGetStarted_home}>
+              Home
             </button>
           </div>
         </div>

@@ -21,7 +21,8 @@ function Login() {
       );
       // Assuming the server returns a token on successful login
       localStorage.setItem("authToken", response.data.token);
-      // Redirect to home page
+      // console.log("Login successful:", response.data);
+      window.localStorage.setItem("loggedIn", "true");
       navigate("/home");
     } catch (err) {
       setError("Login failed. Please check your credentials.");
