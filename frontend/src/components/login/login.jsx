@@ -19,9 +19,9 @@ function Login() {
         "http://localhost:5252/api/v1/users/login",
         { email, password }
       );
-      // Assuming the server returns a token on successful login
-      localStorage.setItem("authToken", response.data.token);
-      // console.log("Login successful:", response.data);
+
+      localStorage.setItem("accessToken", response.data.data.accessToken);
+
       window.localStorage.setItem("loggedIn", "true");
       navigate("/home");
     } catch (err) {

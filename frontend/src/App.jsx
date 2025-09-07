@@ -14,6 +14,7 @@ import Login from "./components/login/login.jsx";
 import Home from "./components/home/home.jsx";
 
 import ProtectedRoute from "./components/auth/ProtectedRoute.jsx";
+import UserProfile from "./components/userProfile/userProfile.jsx";
 
 export default function App() {
   const [formData, setFormData] = useState({});
@@ -51,6 +52,7 @@ export default function App() {
           <Route path="/register_2" element={<Navigate to="/" />} />
           <Route path="/" element={<Home />} />
           <Route path="/home" element={<Home />} />
+          <Route path="/user-profile" element={<UserProfile />} />
         </Route>
       </Routes>
     </Router>
