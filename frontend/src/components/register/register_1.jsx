@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./register.css";
 import "../../App.css";
+import GoogleLoginButton from "../GoogleLoginButton/GoogleLoginButton";
 
 export default function Register_1({ formData, setFormData }) {
   const navigate = useNavigate();
@@ -76,6 +77,8 @@ export default function Register_1({ formData, setFormData }) {
                 Next
               </button>
             </form>
+            <GoogleLoginButton />
+
             <div className="switch-auth-link">
               Already a User? <span onClick={handleLoginSubmit}>Sign In</span>
             </div>

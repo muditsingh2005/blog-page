@@ -4,9 +4,21 @@ import bcrypt from "bcrypt";
 
 const userSchema = new Schema(
   {
+    googleId: {
+      type: String,
+      default: null,
+    },
+
+    profileImage: {
+      type: String,
+      default: null,
+    },
+
     username: {
       type: String,
-      required: true,
+      // required: true,
+      default: null,
+
       unique: true,
       lowercase: true,
       trim: true,
@@ -30,12 +42,14 @@ const userSchema = new Schema(
 
     password: {
       type: String,
-      required: [true, "Password is required"],
+      default: null,
+      // required: [true, "Password is required"],
     },
 
     avatar: {
       type: String, //cloudinary url
-      required: true,
+      default: null,
+      // required: true,
     },
 
     bio: {
@@ -53,7 +67,7 @@ const userSchema = new Schema(
 
 userSchema.pre("save", async function (next) {
   if (!this.isModified("password")) return next();
-  //
+  if (!this.password) return next();
   this.password = await bcrypt.hash(this.password, 10);
   next();
 });

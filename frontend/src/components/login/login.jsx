@@ -3,6 +3,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "./login.css";
 import "../../App.css";
+import GoogleLoginButton from "../GoogleLoginButton/GoogleLoginButton.jsx";
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -84,6 +85,7 @@ function Login() {
                 Login
               </button>
             </form>
+            <GoogleLoginButton />
             <div className="switch-auth-link">
               New user? <span onClick={handleRegisterClick}>Register here</span>
             </div>

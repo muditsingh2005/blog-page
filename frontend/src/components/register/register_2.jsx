@@ -2,6 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import "./register.css";
 import "../../App.css";
+import GoogleLoginButton from "../GoogleLoginButton/GoogleLoginButton";
 
 export default function Register_2({ formData, setFormData }) {
   const [username, setUsername] = useState(formData.username || "");
@@ -156,6 +157,8 @@ export default function Register_2({ formData, setFormData }) {
                 Complete Registration
               </button>
             </form>
+
+            <GoogleLoginButton />
           </div>
         </div>
       </div>
