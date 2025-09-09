@@ -5,19 +5,28 @@ function UserProfile() {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
-    axios
-      .get("http://localhost:5252/api/v1/users/current-user", {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-        },
-        withCredentials: true,
-      })
-      .then((res) => {
-        setUser(res.data.data); // Adjust if your response structure differs
-      })
-      .catch((err) => {
-        console.error(err);
-      });
+    const googleUser = localStorage.getItem("user");
+    const googleToken = localStorage.getItem("token");
+
+    if (googleUser && googleToken) {
+      setUser(JSON.parse(googleUser));
+    } else {
+      axios
+        .get("http://localhost:5252/api/v1/users/current-user", {
+          headers: {
+            Authorization: `Bearer ${
+              localStorage.getItem("accessToken") || googleToken
+            }`,
+          },
+          withCredentials: true,
+        })
+        .then((res) => {
+          setUser(res.data.data); // Adjust if your response structure differs
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    }
   }, []);
 
   if (!user) return <div>Loading...</div>;
