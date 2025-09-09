@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import CreatePost from "../createPost/createPost";
+import CreatePost from "../createPost/createPost.jsx";
 
 function Home() {
   const navigate = useNavigate();
@@ -8,10 +8,6 @@ function Home() {
     e.preventDefault();
     navigate("/user-profile");
   };
-  // const createPostHandller = (e) => {
-  //   e.preventDefault();
-  //   navigate("/create-post");
-  // };
 
   return (
     <div>

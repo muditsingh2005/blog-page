@@ -1,5 +1,9 @@
 @import "../auth/auth.css";
 
+.register-form {
+  padding-bottom: 1.7vh;
+}
+
 /* Progress Indicator (specific to register) */
 .progress-container {
   text-align: center;

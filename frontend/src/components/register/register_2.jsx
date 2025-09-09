@@ -1,5 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import "./register.css";
 import "../../App.css";
 import GoogleLoginButton from "../GoogleLoginButton/GoogleLoginButton";
@@ -10,6 +11,7 @@ export default function Register_2({ formData, setFormData }) {
   const [bio, setBio] = useState(formData.bio || "");
   const [avatar, setavatar] = useState(null);
   const [imagePreview, setImagePreview] = useState(null);
+  const navigate = useNavigate();
 
   const handleAvatarChange = (e) => {
     const file = e.target.files[0];
@@ -46,8 +48,11 @@ export default function Register_2({ formData, setFormData }) {
         form,
         { headers: { "Content-Type": "multipart/form-data" } }
       );
-      console.log("Response from backend: ", res.data);
-      alert("Registration successful!");
+      // console.log("Response from backend: ", res.data);
+      // alert("Registration successful!");
+      localStorage.setItem("accessToken", res.data.data.accessToken);
+      localStorage.setItem("loggedIn", "true");
+      navigate("/home");
     } catch (error) {
       console.error("Error sending registration:", error);
       alert("Registration failed!");
