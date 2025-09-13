@@ -16,6 +16,7 @@ import Home from "./components/home/home.jsx";
 import ProtectedRoute from "./components/auth/ProtectedRoute.jsx";
 import UserProfile from "./components/userProfile/userProfile.jsx";
 import CreatePost from "./components/createPost/createPost.jsx";
+import Logout from "./components/logout/logout.jsx";
 
 export default function App() {
   const [formData, setFormData] = useState({});
@@ -55,6 +56,7 @@ export default function App() {
           <Route path="/home" element={<Home />} />
           <Route path="/user-profile" element={<UserProfile />} />
           <Route path="/create-post" element={<CreatePost />} />
+          <Route path="/logout" element={<Logout />} />
         </Route>
       </Routes>
     </Router>

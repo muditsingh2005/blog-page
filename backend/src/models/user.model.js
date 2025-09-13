@@ -73,6 +73,7 @@ userSchema.pre("save", async function (next) {
 });
 
 userSchema.methods.isPasswordCorrect = async function (password) {
+  if (!this.password) return false; // If no password, it's a Google user, so no password to compare
   return await bcrypt.compare(password, this.password);
 };
 

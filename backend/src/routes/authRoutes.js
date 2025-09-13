@@ -4,7 +4,7 @@ import { OAuth2Client } from "google-auth-library";
 import { User } from "../models/user.model.js";
 
 const router = express.Router();
-const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
+const client = new OAuth2Client(process.env.REACT_APP_GOOGLE_CLIENT_ID);
 
 // POST /api/auth/google
 router.post("/google", async (req, res) => {
@@ -27,9 +27,18 @@ router.post("/google", async (req, res) => {
     // Check if user exists, else create
     let user = await User.findOne({ email });
     if (!user) {
+      let baseUsername = email.split("@")[0];
+      let username = baseUsername;
+      let count = 1;
+      while (await User.findOne({ username })) {
+        username = `${baseUsername}${count}`;
+        count++;
+      }
+
       user = new User({
         fullName: name,
         email,
+        username,
         password: null, // not needed
         googleId: sub,
         profileImage: picture,

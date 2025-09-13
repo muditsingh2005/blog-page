@@ -8,6 +8,10 @@ function Home() {
     e.preventDefault();
     navigate("/user-profile");
   };
+  const getUserLoggedOut = (e) => {
+    e.preventDefault();
+    navigate("/logout");
+  };
 
   return (
     <div>
@@ -15,6 +19,8 @@ function Home() {
       <p>You are now logged in.</p>
       <button onClick={getUserProfile}>user profile</button>
       {/* <button onClick={createPostHandller}>New Post</button> */}
+      <button onClick={getUserLoggedOut}>Logout...</button>
+
       <CreatePost />
     </div>
   );

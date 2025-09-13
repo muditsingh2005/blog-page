@@ -48,14 +48,16 @@ export default function Register_2({ formData, setFormData }) {
         form,
         { headers: { "Content-Type": "multipart/form-data" } }
       );
-      // console.log("Response from backend: ", res.data);
-      // alert("Registration successful!");
+
       localStorage.setItem("accessToken", res.data.data.accessToken);
       localStorage.setItem("loggedIn", "true");
       navigate("/home");
+      window.location.href = "/home"; // redirect to home
+      // alert("Registration successful!");
     } catch (error) {
       console.error("Error sending registration:", error);
       alert("Registration failed!");
+      window.location.href = "/register_1";
     }
   };
 
