@@ -6,20 +6,19 @@ const userSchema = new Schema(
   {
     googleId: {
       type: String,
-      default: null,
+      // default: null,
     },
 
     profileImage: {
       type: String,
-      default: null,
+      // default: null,
     },
 
     username: {
       type: String,
-      // required: true,
-      default: null,
-
+      required: true,
       unique: true,
+      sparse: true,
       lowercase: true,
       trim: true,
       index: true,
@@ -42,13 +41,13 @@ const userSchema = new Schema(
 
     password: {
       type: String,
-      default: null,
+      // default: null,
       // required: [true, "Password is required"],
     },
 
     avatar: {
       type: String, //cloudinary url
-      default: null,
+      // default: null,
       // required: true,
     },
 
