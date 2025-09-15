@@ -63,4 +63,29 @@ const likePost = asyncHandler(async (req, res) => {
     .json(new ApiResponse(200, post, "Post liked successfully"));
 });
 
-export { newPost, likePost };
+const addComment = asyncHandler(async (req, res) => {
+  const { postId } = req.params;
+  const { comment } = req.body;
+  const userId = req.user._id;
+
+  if (!mongoose.Types.ObjectId.isValid(postId)) {
+    throw new ApiError(400, "Invalid post ID");
+  }
+  if (!comment || comment.trim() === "") {
+    throw new ApiError(400, "Comment cannot be empty");
+  }
+
+  const post = await Post.findById(postId);
+  if (!post) {
+    throw new ApiError(404, "Post not found");
+  }
+
+  post.comments.push({ user: userId, comment });
+  await post.save();
+
+  return res
+    .status(200)
+    .json(new ApiResponse(200, post, "Comment added successfully"));
+});
+
+export { newPost, likePost, addComment };
