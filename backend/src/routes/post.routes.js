@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { newPost } from "../controllers/post.controller.js";
+import { newPost, likePost } from "../controllers/post.controller.js";
 import { verifyJWT } from "../middlewares/auth.middleware.js";
 import { upload } from "../middlewares/multer.middleware.js";
 
@@ -11,5 +11,7 @@ router.post(
   upload.fields([{ name: "postImage", maxCount: 1 }]),
   newPost
 );
+
+router.post("/like-post/:postId", verifyJWT, likePost);
 
 export default router;

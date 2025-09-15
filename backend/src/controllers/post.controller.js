@@ -3,6 +3,7 @@ import { ApiError } from "../utils/ApiError.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
 import { Post } from "../models/post.model.js";
 import { uploadOnCloudinary } from "../utils/cloudinary.js";
+import mongoose from "mongoose";
 
 const newPost = asyncHandler(async (req, res) => {
   const { title, content } = req.body;
@@ -36,4 +37,30 @@ const newPost = asyncHandler(async (req, res) => {
     .json(new ApiResponse(200, createdPost, "User registered successfully"));
 });
 
-export { newPost };
+const likePost = asyncHandler(async (req, res) => {
+  const { postId } = req.params;
+  const { userId } = req.user;
+
+  if (!mongoose.Types.ObjectId.isValid(postId)) {
+    throw new ApiError(400, "Invalid post ID");
+  }
+
+  const post = await Post.findById(postId);
+  if (!post) {
+    throw new ApiError(404, "Post not found");
+  }
+
+  // Prevent duplicate likes
+  if (post.likes.includes(userId)) {
+    throw new ApiError(400, "You have already liked this post");
+  }
+
+  post.likes.push(userId);
+  await post.save();
+
+  return res
+    .status(200)
+    .json(new ApiResponse(200, post, "Post liked successfully"));
+});
+
+export { newPost, likePost };
