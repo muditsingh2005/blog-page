@@ -4,6 +4,7 @@ import {
   likePost,
   addComment,
   deletePost,
+  getAllPost,
 } from "../controllers/post.controller.js";
 import { verifyJWT } from "../middlewares/auth.middleware.js";
 import { upload } from "../middlewares/multer.middleware.js";
@@ -22,5 +23,7 @@ router.post("/like-post/:postId", verifyJWT, likePost);
 router.post("/:postId/comment", verifyJWT, addComment);
 
 router.delete("/delete-post/:postId", verifyJWT, deletePost);
+
+router.get("/get-all-post", verifyJWT, getAllPost);
 
 export default router;

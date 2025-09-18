@@ -110,4 +110,15 @@ const deletePost = asyncHandler(async (req, res) => {
     .json(new ApiResponse(200, {}, "Post deleted successfully"));
 });
 
-export { newPost, likePost, addComment, deletePost };
+const getAllPost = asyncHandler(async (req, res) => {
+  const posts = await Post.find()
+    .populate("author", "username email profilePic") // show author info
+    .populate("comments.user", "username profilePic") // show commenter info
+    .sort({ createdAt: -1 }); // newest first
+
+  return res
+    .status(200)
+    .json(new ApiResponse(200, posts, "All posts fetched successfully"));
+});
+
+export { newPost, likePost, addComment, deletePost, getAllPost };
