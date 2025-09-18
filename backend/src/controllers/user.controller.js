@@ -4,6 +4,7 @@ import { User } from "../models/user.model.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
 import { uploadOnCloudinary } from "../utils/cloudinary.js";
 import jwt from "jsonwebtoken"; // Import jwt
+import { Post } from "../models/post.model.js";
 
 const generateAccessAndRefreshTokens = async (userId) => {
   try {
@@ -248,6 +249,26 @@ const getCurrentUser = asyncHandler(async (req, res) => {
     .json(new ApiResponse(200, user, "Current user fetched successfully"));
 });
 
+const deleteAccount = asyncHandler(async (req, res) => {
+  const userId = req.user._id;
+  if (!userId) {
+    throw new ApiError(404, "User not found");
+  }
+  //delete all post by user
+  await Post.deleteMany({ author: userId });
+  //delete all comment and likes
+  await Post.updateMany(
+    { "comments.user": userId },
+    { $pull: { comments: { user: userId } } }
+  );
+  await Post.updateMany({ likes: userId }, { $pull: { likes: userId } });
+  //delete user
+  await User.findByIdAndDelete(userId);
+  return res
+    .status(200)
+    .json(new ApiResponse(200, { User }, "Account deleted successfully"));
+});
+
 export {
   registerUser,
   loginUser,
@@ -255,4 +276,5 @@ export {
   changeCurrentPassword,
   getCurrentUser,
   refreshAccessToken,
+  deleteAccount,
 };

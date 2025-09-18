@@ -39,7 +39,7 @@ const newPost = asyncHandler(async (req, res) => {
 
 const likePost = asyncHandler(async (req, res) => {
   const { postId } = req.params;
-  const { userId } = req.user;
+  const { userId } = req.user._id;
 
   if (!mongoose.Types.ObjectId.isValid(postId)) {
     throw new ApiError(400, "Invalid post ID");
@@ -88,4 +88,26 @@ const addComment = asyncHandler(async (req, res) => {
     .json(new ApiResponse(200, post, "Comment added successfully"));
 });
 
-export { newPost, likePost, addComment };
+const deletePost = asyncHandler(async (req, res) => {
+  const { postId } = req.params;
+  const userId = req.user._id;
+
+  if (!mongoose.Types.ObjectId.isValid(postId)) {
+    throw new ApiError(400, "Invalid post ID");
+  }
+  const post = await Post.findById(postId);
+  if (!post) {
+    throw new ApiError(404, "Post not found");
+  }
+  if (post.author.toString() !== userId.toString()) {
+    throw new ApiError(403, "You are not authorized to delete this post");
+  }
+
+  await Post.findByIdAndDelete(postId);
+
+  return res
+    .status(200)
+    .json(new ApiResponse(200, {}, "Post deleted successfully"));
+});
+
+export { newPost, likePost, addComment, deletePost };
