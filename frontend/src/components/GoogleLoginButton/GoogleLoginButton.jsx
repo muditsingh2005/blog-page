@@ -10,9 +10,12 @@ export default function GoogleLoginButton() {
 
     try {
       // send Google token to backend
-      const res = await axios.post("http://localhost:5252/api/v3/auth/google", {
-        token,
-      });
+      const res = await axios.post(
+        `${import.meta.env.VITE_API_BASE_URL}/api/v3/auth/google`,
+        {
+          token,
+        }
+      );
 
       // backend returns your JWT
       localStorage.setItem("token", res.data.accessToken);

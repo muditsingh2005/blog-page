@@ -12,7 +12,7 @@ function Logout() {
           localStorage.getItem("accessToken") || localStorage.getItem("token");
 
         await axios.post(
-          "http://localhost:5252/api/v1/users/logout",
+          `${import.meta.env.VITE_API_BASE_URL}/api/v1/users/logout`,
           {},
           {
             headers: {
